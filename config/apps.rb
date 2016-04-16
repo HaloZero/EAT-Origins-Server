@@ -27,10 +27,12 @@
 #
 Padrino.configure_apps do
   # enable :sessions
-  set :session_secret, 'fe45f9ec39fefcee0369176468d0b6e3aad6f844c5356b90f2a47be8220641c6'
+  set :session_secret, 'a8d978a2045e3533f44ae0f320d7e85a557e713a2e26145d29f2866ba66948ef'
   set :protection, :except => :path_traversal
   set :protect_from_csrf, true
 end
 
 # Mounts the core application for this project
-Padrino.mount('EatOriginServer::App', :app_file => Padrino.root('app/app.rb')).to('/')
+
+Padrino.mount("EatOriginsServer::Admin", :app_file => Padrino.root('admin/app.rb')).to("/admin")
+Padrino.mount('EatOriginsServer::App', :app_file => Padrino.root('app/app.rb')).to('/')

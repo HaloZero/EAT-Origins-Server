@@ -15,19 +15,19 @@
 #
 ActiveRecord::Base.configurations[:development] = {
   :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'eat_origin_server_development.db')
+  :database => Padrino.root('db', 'eat_origins_server_development.db')
 
 }
 
 ActiveRecord::Base.configurations[:production] = {
   :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'eat_origin_server_production.db')
+  :database => Padrino.root('db', 'eat_origins_server_production.db')
 
 }
 
 ActiveRecord::Base.configurations[:test] = {
   :adapter => 'sqlite3',
-  :database => Padrino.root('db', 'eat_origin_server_test.db')
+  :database => Padrino.root('db', 'eat_origins_server_test.db')
 
 }
 

@@ -17,6 +17,9 @@ source 'https://rubygems.org'
 gem 'rake'
 
 # Component requirements
+gem 'bcrypt'
+gem 'sass'
+gem 'haml'
 gem 'activerecord', '>= 3.1', :require => 'active_record'
 gem 'sqlite3'
 
@@ -27,7 +30,11 @@ gem 'padrino', '0.13.1'
 
 gem 'paperclip'
 gem 'paperclip-rack', require: 'paperclip/rack'
+
+# TODO: Make this only in debug mode
 gem 'pry'
+
+
 # Or Padrino Edge
 # gem 'padrino', :github => 'padrino/padrino-framework'
 

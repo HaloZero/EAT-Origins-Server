@@ -38,6 +38,10 @@ Bundler.require(:default, RACK_ENV)
 # Add your before (RE)load hooks here
 #
 Padrino.before_load do
+	ActiveRecord::Base.send(:include, Paperclip::Glue)
+	
+	Paperclip.options[:logger] = Padrino.logger
+	Paperclip.options[:command_path] = "/usr/local/bin/"
 end
 
 ##
