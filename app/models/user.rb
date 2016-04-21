@@ -12,4 +12,13 @@ class User < ActiveRecord::Base
 		}
 
 	validates_attachment_content_type :picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
+	def to_json()
+		{
+			id: self.id,
+			name: self.name,
+			picture_url: EatOriginsServer::App.settings.host+self.picture.url
+		}
+	end
+
 end

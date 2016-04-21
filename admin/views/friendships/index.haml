@@ -1,0 +1,60 @@
+%ul.nav.nav-tabs
+  %li.active=link_to tag_icon(:list, pat(:list)), url(:friendships, :index)
+  %li=link_to tag_icon(:plus, pat(:new)), url(:friendships, :new)
+
+.tabs-content
+  %table#list.table.table-striped.table-hover.table-condensed
+    %thead
+      %tr
+        %th.header.list-menu
+          .dropdown
+            %a.list-menu-toggle.dropdown-toggle{:href => '#', :'data-toggle' => :dropdown}
+              =tag_icon :magic
+              %span.caret
+            %ul.list-menu.dropdown-menu{:role => :menu}
+              %li.list-menu-wrapper=link_to tag_icon('check-square-o', pat(:select_all)), '#', :id => 'select-all', :class => 'list-menu-link'
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('square-o', pat(:deselect_all)), '#', :id => 'deselect-all', :class => 'list-menu-link list-menu-link-disabled'
+              %li.list-menu-divider.divider
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('trash-o', pat(:delete_selected)), '#', :id => 'delete-selected', :class => 'list-menu-link list-menu-link-disabled'
+                .list-menu-popover-delete-selected.popover.right
+                  .arrow
+                  %h3.popover-title=pat(:delete_selected_title)
+                  .popover-content
+                    = form_tag url(:friendships, :destroy_many), :method => :delete do
+                      =hidden_field_tag :friendship_ids, :'data-delete-many-ids' => true
+                      =submit_tag pat(:delete), :class =>'list-menu-popover-delete-selected-btn btn btn-danger btn-small'
+                      .btn.btn-default.btn-small.cancel=pat(:cancel)
+        %th.header= mat(:friendship, :id)
+        %th.header= mat(:friendship, :old_friend)
+        %th.header= mat(:friendship, :new_friend)
+        %th.header= mat(:friendship, :relationship_type)
+        %th.header= mat(:friendship, :story)
+        %th.header.list-row-action-header
+
+    %tbody
+      -@friendships.each do |friendship|
+        %tr.list-row
+          %td.list-column.list-selectable
+            =check_box_tag 'friendship_ids[]', :value => friendship.id, :class => 'list-selectable-checkbox'
+          %td.list-column=friendship.id
+          %td.list-column
+            %h4=friendship.old_friend.name
+            =image_tag(friendship.old_friend.picture.url(:thumb))
+          %td.list-column
+            %h4=friendship.new_friend.name
+            =image_tag(friendship.new_friend.picture.url(:thumb))
+          %td.list-column=friendship.relationship_type
+          %td.list-column=friendship.story
+          %td.list-column.list-row-action
+            .list-row-action-wrapper
+              =link_to tag_icon(:edit), :href => url(:friendships, :edit, :id => friendship.id), :rel => :tooltip, :title => "#{pat(:edit)} friendship", :class => 'list-row-action-wrapper-link'
+              =link_to tag_icon('trash-o'), :rel => :tooltip, :title => "#{pat(:delete)} friendship", :class => 'list-row-action-delete-one list-row-action-wrapper-link'
+              .popover.list-row-action-popover-delete-one.left
+                .arrow
+                %h3.popover-title=pat(:delete, :model => "friendship")
+                .popover-content
+                  = form_tag url(:friendships, :destroy, :id => friendship.id), :method => :delete do
+                    =submit_tag pat(:delete), :class =>'list-row-action-popover-delete-one-btn btn btn-danger btn-small'
+                    .btn.btn-default.btn-small.cancel=pat(:cancel)

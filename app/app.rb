@@ -46,10 +46,14 @@ module EatOriginsServer
     ##
     # You can configure for a specified environment like:
     #
-    #   configure :development do
-    #     set :foo, :bar
-    #     disable :asset_stamp # no asset timestamping for dev
-    #   end
+    configure :development do
+        set :host, "http://localhost:3000"
+        disable :asset_stamp # no asset timestamping for dev
+    end
+
+    configure :production do 
+
+    end
     #
 
     ##

@@ -1,0 +1,31 @@
+- error = @friendship.errors.include?(:old_friend_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :old_friend_id, :class => 'control-label'
+  .controls
+    =f.text_field :old_friend_id, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:old_friend_id, :class => 'text-error') : pat(:example)
+- error = @friendship.errors.include?(:new_friend_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :new_friend_id, :class => 'control-label'
+  .controls
+    =f.text_field :new_friend_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:new_friend_id, :class => 'text-error') : pat(:example)
+- error = @friendship.errors.include?(:relationship_type)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :relationship_type, :class => 'control-label'
+  .controls
+    =f.text_field :relationship_type, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:relationship_type, :class => 'text-error') : pat(:example)
+- error = @friendship.errors.include?(:story)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :story, :class => 'control-label'
+  .controls
+    ~f.text_area :story, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:story, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:friendships, :index), :class => 'btn btn-default'
